@@ -15,6 +15,12 @@ public:
 	// Sets default values for this character's properties
 	AMyCharacter();
 
+private:
+	UPROPERTY(VisibleDefaultsOnly, Category = "ASC")
+	class UMyAbilitySystemComponent* MyAbilitySystemComponent;
+
+	class UMyAttributeSet* MyAttributeSet;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -25,5 +31,8 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	void ServerSideInit();
+	void ClientSideInit();
 
 };

@@ -37,6 +37,12 @@ protected:
 	UFUNCTION(BlueprintCallable, meta = (BlueprintThreadSafe))
 	FORCEINLINE bool GetIsJumping() const { return bIsJumping; }
 
+	UFUNCTION(BlueprintCallable, meta = (BlueprintThreadSafe))
+	FORCEINLINE float GetLookYawOffset() const {return LookRotOffset.Yaw; }
+
+	UFUNCTION(BlueprintCallable, meta = (BlueprintThreadSafe))
+	FORCEINLINE float GetLookPitchOffset() const { return LookRotOffset.Pitch; }
+
 	UPROPERTY()
 	class AMyCharacter* OwningCharacter;
 
@@ -52,4 +58,5 @@ protected:
 	bool bIsJumping;
 
 	FRotator BodyPrevRot;
+	FRotator LookRotOffset;
 };

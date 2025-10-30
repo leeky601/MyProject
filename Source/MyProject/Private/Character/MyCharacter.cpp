@@ -2,6 +2,8 @@
 
 
 #include "Character/MyCharacter.h"
+#include "AbilitySystem/MyAbilitySystemComponent.h"
+#include "AbilitySystem/MyAttributeSet.h"
 
 // Sets default values
 AMyCharacter::AMyCharacter()
@@ -11,6 +13,21 @@ AMyCharacter::AMyCharacter()
 
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
+	MyAbilitySystemComponent = CreateDefaultSubobject<UMyAbilitySystemComponent>(TEXT("MyAbilitySystemComponent"));
+
+	MyAttributeSet = CreateDefaultSubobject<UMyAttributeSet>(TEXT("MyAttributeSet"));
+
+}
+
+void AMyCharacter::ServerSideInit()
+{
+	MyAbilitySystemComponent->InitAbilityActorInfo(this, this);
+	MyAbilitySystemComponent->ApplyInitialEffect();
+}
+
+void AMyCharacter::ClientSideInit()
+{
+	MyAbilitySystemComponent->InitAbilityActorInfo(this, this);
 }
 
 // Called when the game starts or when spawned

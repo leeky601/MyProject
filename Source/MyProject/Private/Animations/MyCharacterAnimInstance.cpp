@@ -23,6 +23,7 @@ void UMyCharacterAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 		return;
 	}
 
+	//lean 값 계산
 	Speed = OwningCharacter->GetVelocity().Length();
 
 	FRotator BodyRot = OwningCharacter->GetActorRotation();
@@ -33,7 +34,13 @@ void UMyCharacterAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 
 	SmoothedYawSpeed = UKismetMathLibrary::FInterpTo(SmoothedYawSpeed, YawSpeed, DeltaSeconds, SmoothedYawInterpSpeed);
 
+	//점프
 	bIsJumping = OwningMovementComponent->IsFalling();
+
+	//lookoffset값 계산
+	FRotator ControlRot = OwningCharacter->GetBaseAimRotation();
+	LookRotOffset = UKismetMathLibrary::NormalizedDeltaRotator(ControlRot, BodyRot);
+
 }
 
 void UMyCharacterAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
