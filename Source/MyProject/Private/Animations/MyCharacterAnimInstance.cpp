@@ -5,6 +5,7 @@
 #include "Character/MyCharacter.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "KismetAnimationLibrary.h"
 
 void UMyCharacterAnimInstance::NativeInitializeAnimation()
 {
@@ -40,6 +41,9 @@ void UMyCharacterAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	//lookoffset°ª °è»ê
 	FRotator ControlRot = OwningCharacter->GetBaseAimRotation();
 	LookRotOffset = UKismetMathLibrary::NormalizedDeltaRotator(ControlRot, BodyRot);
+
+	//Direction
+	LocomotionDirection = UKismetAnimationLibrary::CalculateDirection(OwningCharacter->GetVelocity(), OwningCharacter->GetActorRotation());
 
 }
 

@@ -10,17 +10,20 @@
 
 AMyPlayerCharacter::AMyPlayerCharacter()
 {
+	bUseControllerRotationPitch = false;    //컨트롤러와 폰의 회전 값을 동기화
 	bUseControllerRotationYaw = false;
+	bUseControllerRotationRoll = false;
 
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->SetupAttachment(GetRootComponent());
-	CameraBoom->bUsePawnControlRotation = true;
+	CameraBoom->bUsePawnControlRotation = true;  //카메라 붐이 컨트롤러의 회전을 따라옴
 
 	FollowCam = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCam"));
 	FollowCam->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	FollowCam->bUsePawnControlRotation = false;
 
-	GetCharacterMovement()->bOrientRotationToMovement = true;
+	GetCharacterMovement()->bOrientRotationToMovement = false; //캐릭터의 벡터가 폰을 회전시키지 않음
+	GetCharacterMovement()->bUseControllerDesiredRotation = true; // 캐릭터의 rot 값을 컨트롤러의 rot 값으로 roationrate 속도로 동기화
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 720.f, 0.f);
 
 }

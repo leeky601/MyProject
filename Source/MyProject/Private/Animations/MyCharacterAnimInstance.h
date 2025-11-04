@@ -43,6 +43,9 @@ protected:
 	UFUNCTION(BlueprintCallable, meta = (BlueprintThreadSafe))
 	FORCEINLINE float GetLookPitchOffset() const { return LookRotOffset.Pitch; }
 
+	UFUNCTION(BlueprintCallable, meta = (BlueprintThreadSafe))
+	FORCEINLINE float GetLocomotionDirection() const { return LocomotionDirection; }
+
 	UPROPERTY()
 	class AMyCharacter* OwningCharacter;
 
@@ -55,6 +58,7 @@ protected:
 	float Speed;
 	float YawSpeed;
 	float SmoothedYawSpeed;
+	float LocomotionDirection;
 	bool bIsJumping;
 
 	FRotator BodyPrevRot;
